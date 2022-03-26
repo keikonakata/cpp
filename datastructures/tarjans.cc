@@ -1,12 +1,8 @@
 // clang++-10 -Wall -std=c++17 tarjans.cc
 // bazel build //datastructures:tarjans
-#include <exception>
-#include <iostream>
-#include <map>
-#include <unordered_map>
-#include <vector>
-
 #include "tarjans.h"
+
+using namespace tarjans;
 
 // require vertex notin dom(indexes)
 // require (verex |-> targets) in graph
@@ -55,7 +51,6 @@ index_t Tarjans::tarjans_rec(vertex_t vertex, const std::vector<vertex_t>& targe
   return current_lowest_link;
 }
 
-// requires \dom(graph) is the set of vertexes
 Tarjans::Tarjans(const graph_t& _graph) : graph(_graph) {
   for (auto& single_source_edges : graph){// O(V)
     auto vertex = single_source_edges.first;
