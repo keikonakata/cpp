@@ -26,7 +26,7 @@ namespace tarjans {
     // requires \dom(graph) is the set of vertexes
     Tarjans(const graph_t&);
   private:
-    const graph_t graph;
+    const graph_t& graph;
     indexes_t indexes;
     stack_t stack;
     index_t next_index {0};

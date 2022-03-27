@@ -34,9 +34,10 @@ index_t Tarjans::tarjans_rec(vertex_t vertex, const std::vector<vertex_t>& targe
   }
   if (current_lowest_link == my_index){
     component_t component;
-    for (auto i = stack.find(my_index); i != stack.end(); i++) {
+    for (auto i = stack.find(my_index); i != stack.end();) {
       component.emplace_back(i->second);
-      stack.erase(i);
+      // i gets invalidated after erase
+      stack.erase(i++);
     }
     /* for unordered_map stack
    for (auto cur = my_index; cur < next_index; cur++){
