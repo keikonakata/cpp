@@ -15,7 +15,6 @@ cc_binary(
   ],
   linkopts = ["-lpthread"],
 )
-
 cc_binary(
   name = "mst_kruskal",
   srcs = ["mst_kruskal.cc", "disjoint_set.hpp"],
@@ -25,6 +24,13 @@ cc_binary(
   srcs = ["mystack.cc", "mystack.hpp", "myitem.hpp"],
   deps = [
     ":myitem",
+  ],
+)
+cc_binary(
+  name = "tarjans_main",
+  srcs = ["tarjans_main.cc", "tarjans.h"],
+  deps = [
+    ":tarjans",
   ],
 )
 
@@ -47,5 +53,15 @@ cc_test(
   deps = [
     "@com_google_googletest//:gtest_main",
     ":myitem",
+  ],
+)
+
+cc_test(
+  name = "tarjans_test",
+  size = "small",
+  srcs = ["tarjans_test.cc", "tarjans.h"],
+  deps = [
+    "@com_google_googletest//:gtest_main",
+    ":tarjans",
   ],
 )
