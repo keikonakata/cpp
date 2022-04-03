@@ -9,21 +9,19 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 
   graph_t g;
 
-  uint8_t len = data[0];
-  if (len == 0) {
-    len = 5; //FIXME: better fall-back value?
-  }
+  uint8_t const len = data[0];
+  if (len != 0) {
+    std::size_t pos = 0; // std::size_t and size_t are the same
+    std::vector<std::vector<vertex_t>> vv {len};
+    for (std::size_t i = 1; i < size; i++) {
+      vertex_t v = data[i] % len;
+      vv.at(pos).push_back(v);
+      pos = (pos + 1) % len;
+    }
 
-  std::size_t pos = 0; // std::size_t and size_t are the same
-  std::vector<std::vector<vertex_t>> vv {len};
-  for (std::size_t i = 1; i < size; i++) {
-    vertex_t v = i % len;
-    vv.at(pos).push_back(v);
-    pos = (pos + 1) % len;
-  }
-
-  for (size_t i = 0; i < len; i++){
-    g.insert(std::pair{i, std::move(vv.at(i))});
+    for (uint8_t i = 0; i < len; i++){
+      g.insert(std::pair{i, std::move(vv.at(i))});
+    }
   }
 
   Tarjans t (g);
