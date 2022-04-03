@@ -1,7 +1,3 @@
-#include <algorithm>
-#include <cassert>
-#include <iostream>
-#include <vector>
 #include "tarjans.h"
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
