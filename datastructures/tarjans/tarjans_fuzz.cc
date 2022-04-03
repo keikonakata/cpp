@@ -7,15 +7,24 @@
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   using namespace tarjans;
 
-  graph_t const g;
+  graph_t g;
 
-    uint8_t const len = data[0] + static_cast<uint8_t>(1);
-    std::size_t pos = 0; // std::size_t and size_t are the same
-    std::vector<std::vector<uint8_t>> vv {len};
-    for (std::size_t i = 1; i < len ; i++) {
-      vv.at(pos).emplace_back(i);
-      pos = (pos + 1) % len;
-    }
+  uint8_t len = data[0];
+  if (len == 0) {
+    len = 5; //FIXME: better fall-back value?
+  }
+
+  std::size_t pos = 0; // std::size_t and size_t are the same
+  std::vector<std::vector<vertex_t>> vv {len};
+  for (std::size_t i = 1; i < size; i++) {
+    vertex_t v = i % len;
+    vv.at(pos).push_back(v);
+    pos = (pos + 1) % len;
+  }
+
+  for (size_t i = 0; i < len; i++){
+    g.insert(std::pair{i, std::move(vv.at(i))});
+  }
 
   Tarjans t (g);
   return 0;
