@@ -16,9 +16,8 @@ namespace tarjans {
   using component_t = std::vector<vertex_t>;
   using components_t = std::vector<component_t>;
   // use map (instead of unordered_map) due to range access
-  // to increase data locality (is it better?)
+  // (Does it really perform better?)
   using stack_t = std::map<index_t, vertex_t>;
-  //using stack_t = std::unordered_map<index_t, vertex_t>;
 
   class Tarjans {
   public:
