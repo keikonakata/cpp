@@ -1,4 +1,6 @@
+#include <cassert>
 #include "tarjans.h"
+#include "tarjans_norec.h"
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   using namespace tarjans;
@@ -21,5 +23,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   }
 
   Tarjans t (g);
+  tarjans_norec::Tarjans t1 (g);
+  assert(t.components.size() == t1.components.size());
+
   return 0;
 }
