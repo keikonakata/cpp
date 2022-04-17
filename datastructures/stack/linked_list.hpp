@@ -8,10 +8,10 @@
 #include <thread>
 #include <utility>
 
-namespace cstack {
+namespace linked_list {
 
   template <typename T>
-  class Stack {
+  class LList {
     struct Item {
       using next_ptr = std::unique_ptr<Item>;
       T data;
@@ -24,8 +24,8 @@ namespace cstack {
     mutable std::mutex m;
     std::condition_variable cv;
   public:
-    Stack() : head(nullptr) {}
-    ~Stack() {
+    LList() : head(nullptr) {}
+    ~LList() {
       while (head) {
 	head = std::move(head->next);
       }
