@@ -22,6 +22,7 @@ public:
 
     while (!next.empty()){
       current = std::move(next);
+      next.clear();
       ++current_level;
       for (auto n : current) {
 	auto targets = g.find(n);
@@ -29,6 +30,7 @@ public:
 	  throw std::invalid_argument("vertex not found in the graph");
 	for (auto target : targets->second) {
 	  if (levels.find(target) == levels.end()){
+	    // target is white
 	    levels.insert(std::pair{target, current_level});
 	    parents.insert(std::pair{target, n});
 	    next.push_back(target);
