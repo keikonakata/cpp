@@ -12,12 +12,16 @@ public:
   std::unordered_map<T, int, Hash> levels;
   std::unordered_map<T, T, Hash> parents;
 
+  T parent(const T node) {
+    return parents.at(node);
+  }
+
   Bfs(const graph_t& g, T root) {
     nodes_t current;
     nodes_t next;
     auto current_level = 0;
     next.push_back(root);
-    levels.insert(std::pair{root, 0});
+    levels.insert(std::pair{root, current_level});
     parents.insert(std::pair{root, root});
 
     while (!next.empty()){
