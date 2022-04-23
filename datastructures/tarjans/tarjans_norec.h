@@ -29,6 +29,8 @@ namespace tarjans_norec {
     Tarjans(const graph_t&);
   private:
     const graph_t& graph;
+    // TODO: clean these local stores once the construction is complete
+    // TODO: allocate them on stack?
     indexes_t indexes;
     lowestlink_t lowestlinks;
     path_t path;
