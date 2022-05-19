@@ -23,6 +23,7 @@ private:
     std::unique_lock<std::mutex> tail_lock(tail_mutex);
     tail->next = std::move(node);
     tail->data = std::move(data);
+    tail = tail->next.get();
   }
 public:
   using value_t = T;
