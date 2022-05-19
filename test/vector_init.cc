@@ -4,6 +4,27 @@
 #include <iostream>
 #include <vector>
 
+/*
+malloc
+1x 10^ 5 for 562ns
+1x 10^ 6 for 141ns
+1x 10^ 7 for 131ns
+1x 10^ 8 for 155ns
+1x 10^ 9 for 118ns
+reserve
+1x 10^ 5 for 51us
+1x 10^ 6 for 37us
+1x 10^ 7 for 33us
+1x 10^ 8 for 39us
+1x 10^ 9 for 53us
+ctor
+1x 10^ 5 for 0ms
+1x 10^ 6 for 5ms
+1x 10^ 7 for 60ms
+1x 10^ 8 for 238ms
+1x 10^ 9 for 1791ms
+*/
+
 using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using t = int;
