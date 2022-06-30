@@ -1,3 +1,13 @@
+## Hardware
+
+Ubuntu on Dell XPS 13 9360 (075B)
+
+Memory 8GiB, 2 banks 4GiB each, 64-bit width, 1867MHz (0.5ns)
+
+Cache 128KiB L1, 512KiB L2, 4MiB L3
+
+as per `lshw -C memory`.
+
 # cpp
 
 - [Clang sanitizers](https://github.com/google/sanitizers)
