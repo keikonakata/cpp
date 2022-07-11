@@ -19,10 +19,10 @@ public:
       return;
     const size_t depth = std::ceil(std::log2(data.size()));
     CALLGRIND_TOGGLE_COLLECT;
-    sort(depth, 0, data.size());
+    sort(depth, 0, data.size()); // sort
     CALLGRIND_TOGGLE_COLLECT;
-    if (depth%2 == 1)
-      data = std::move(memo);
+    if (depth%2 == 0)
+      data = std::move(memo); // move
   }
 private:
   data_t& data;
