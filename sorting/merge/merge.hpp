@@ -17,9 +17,11 @@ public:
   Merge(data_t& _data) : data(_data), memo(data.size()) {
     if (data.size() < 2)
       return;
-    const size_t depth = std::ceil(std::log2(data.size())) - 1;
+    const size_t depth = std::ceil(std::log2(data.size()));
+    CALLGRIND_TOGGLE_COLLECT;
     sort(depth, 0, data.size());
-    if (depth%2 != 1)
+    CALLGRIND_TOGGLE_COLLECT;
+    if (depth%2 == 1)
       data = std::move(memo);
   }
 private:
@@ -41,21 +43,21 @@ private:
     size_t pos2 = b+half;
     while (pos1 < b+half && pos2 < b+len){
       if (src->at(pos1) < src->at(pos2)){
-	trg->at(pos++) = std::move(src->at(pos1++));
+	trg->operator[](pos++) = std::move(src->operator[](pos1++));
       } else {
-	trg->at(pos++) = std::move(src->at(pos2++));
+	trg->operator[](pos++) = std::move(src->operator[](pos2++));
       }
     }
     while (pos1 < b+half){
-      trg->at(pos++) = std::move(src->at(pos1++));
+      trg->operator[](pos++) = std::move(src->operator[](pos1++));
     }
     while (pos2 < b+len){
-      trg->at(pos++) = std::move(src->at(pos2++));
+      trg->operator[](pos++) = std::move(src->operator[](pos2++));
     }
   }
   void sort(size_t depth, size_t b, size_t len){
     if (len == 1){
-      if (depth%2 == 0)
+      if (depth%2 == 1)
 	memo.at(b) = std::move(data.at(b));
       return;
     }
