@@ -1,4 +1,4 @@
-///usr/bin/clang++-10 -Wall -std=c++17 -g -O2 vector_init.cc
+//usr/bin/clang++-10 -Wall -std=c++17 -O2 vector_init.cc
 #include <chrono>
 #include <cmath>
 #include <iostream>
